@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: xx-large;
+    background-color: red;
+}
+
+body {
+    font-family: Arial;
+}
+
+#Register {
+    padding: 100px;
+    background-color: red;
+}
+
+#userInfo {
+    background-color: red;
+}
+

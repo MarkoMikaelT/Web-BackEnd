@@ -1,0 +1,82 @@
+[{
+  "_id": {
+    "$oid": "603faea907e5830c48336640"
+  },
+  "id": 1,
+  "course_name": "Maths",
+  "credits": 2,
+  "study_year": 0,
+  "teacher": "Edwin"
+},{
+  "_id": {
+    "$oid": "603faea907e5830c48336641"
+  },
+  "id": 2,
+  "course_name": "Physics",
+  "credits": 12,
+  "study_year": 2,
+  "teacher": "Patsy"
+},{
+  "_id": {
+    "$oid": "603faea907e5830c48336642"
+  },
+  "id": 3,
+  "course_name": "Chemistry",
+  "credits": 6,
+  "study_year": 0,
+  "teacher": "Annie"
+},{
+  "_id": {
+    "$oid": "603faea907e5830c48336643"
+  },
+  "id": 4,
+  "course_name": "Programming 1",
+  "credits": 8,
+  "study_year": 1,
+  "teacher": "Michelle"
+},{
+  "_id": {
+    "$oid": "603faea907e5830c48336644"
+  },
+  "id": 5,
+  "course_name": "Programming 2",
+  "credits": 8,
+  "study_year": 0,
+  "teacher": "Sandra"
+},{
+  "_id": {
+    "$oid": "603faea907e5830c48336645"
+  },
+  "id": 6,
+  "course_name": "Electronics",
+  "credits": 11,
+  "study_year": 3,
+  "teacher": "Virginia"
+},{
+  "_id": {
+    "$oid": "603faea907e5830c48336647"
+  },
+  "id": 8,
+  "course_name": "Swedish",
+  "credits": 8,
+  "study_year": 0,
+  "teacher": "Bendicth"
+},{
+  "_id": {
+    "$oid": "603faea907e5830c48336648"
+  },
+  "id": 9,
+  "course_name": "Game programming",
+  "credits": 12,
+  "study_year": 3,
+  "teacher": "Louise"
+},{
+  "_id": {
+    "$oid": "603faea907e5830c48336649"
+  },
+  "id": 10,
+  "course_name": "Leadership",
+  "credits": 0,
+  "study_year": 1,
+  "teacher": "Marshall"
+}]

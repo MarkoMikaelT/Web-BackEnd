@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Socket.io Harjoitus</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width", initial-scale=1.0>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                font-family: Arial;
+            }
+            .boxInput {
+                display: flex;
+                flex-direction: left;
+            }
+            .boxMessages {
+                display: flex;
+                flex-direction: left;
+            }
+            #userinfo {
+                top: 50px;
+                left: 5px;
+                position: fixed;
+            }
+            #Register {
+                padding: 10px;
+            }
+            #private {
+                padding: 10px;
+            }
+            #myMessage {
+                padding: 10px;
+            }
+            #messages {
+                background-color: rgba(27, 160, 0, 0.158);
+            }
+            #userLog {
+                background-color: rgba(0, 155, 160, 0.158);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Chattter</h1>
+
+    <div class="boxInput">
+        <form id="Register">
+            <input id="user">
+            <button>Log In</button>
+        </form>
+
+        <form id="private">
+            <input id="privMes">
+            <button onclick="uploadData()">Send Private</button>
+        </form>
+
+        <form id="myMessage">
+            <input id="mes">
+            <button onclick="uploadData()">Send</button>
+
+            <div class="boxMessages">
+                <ul id="messages"></ul>
+                <ul id="userLog"></ul>
+            </div>
+        </form>
+    </div>
+
+        <div id="userInfo">
+            <div id="ERROR"></div>
+            <button onclick="showUserData()">Show User data</button>
+
+            <div id="showTable"></div> 
+        </div>
+
+        <script>
+            $(()=> {
+                var socket = io()
+
+                var DefRoom = "default123"
+
+                $("#Register").submit(()=> {
+                    User = $("#user").val()
+                    if(User == "") {
+                        console.log("INVALID User!")
+                        $("#ERROR").empty()
+                        $("#ERROR").append($("<p>").text("Please enter a valid username."))
+                    }
+                    else {
+                    socket.emit('New User', User)
+                    socket.emit('JOIN room', DefRoom, User)
+                    console.log("User: " + User +" logged in")
+                    // $("#user").val("")
+                    $("#ERROR").empty()
+                    }
+                    return false
+                })
+
+                socket.on("New User", (User)=> {
+                    $("#userLog").append($("<li>").text(User + " | logged on"))
+                })
+
+                $("#private").submit(()=> {
+                    console.log("Forwarding PRIVATE message")
+                    var to = $("#privMes").val()
+                   // console.log(to)
+                    var from = User
+                    socket.emit("PrivateViesti", to, (User + "(Private): " + $("#mes").val()))
+                        $("#mes").val("")
+                    return false
+                })
+            
+                $("#myMessage").submit(()=> {
+                    console.log("Forwarding message")
+                    socket.emit("Viesti", User + ": " + $("#mes").val())
+                    $("#mes").val("")
+                    return false
+                })
+
+                socket.on("server_Viesti", (msg)=> {
+                    console.log("Message forwarded")
+                    if(User == "") {
+                        console.log("INVALID User!")
+                        $("#ERROR").empty()
+                        $("#ERROR").append($("<p>").text("Please enter a valid username."))
+                    }
+                    else {
+                    $("#messages").append($("<li>").text(msg))
+                    }
+                })
+
+                socket.on("user disconnect", (user)=> {
+                    console.log("USER DISCONNECT")
+                    $("#userLog").append($("<li>").text(user + " | logged off"))
+                })
+            })
+
+    //________functions____Data Handling and printing__________
+            function uploadData() {
+                var userName = $("#user").val()
+                var userMes = $("#mes").val()
+                var D = new Date() 
+                var userTime = D.toUTCString()
+                //console.log(userMes)
+                var userData = {
+                    User_id: userName, 
+                    User_msg: userMes,
+                    Time_msg: userTime
+                }
+                axios.post('http://localhost:3000/', userData)
+                    .then((response)=> {
+                        console.log("Response: " + response.status)
+                    })
+                    .catch((error)=> {
+                        console.log("Error in saving msg data!")
+                    })
+            }
+
+            function showUserData() {
+                axios.get('http://localhost:3000/' + User)
+                    .then((response)=> {
+                        console.log("INDEX juttu")
+ 
+                        var Us = response.data
+                        userTable(Us)
+                        })
+                    }
+
+            function userTable(Us) {
+                var table = document.createElement('table')
+                table.setAttribute('id', 'userTable')
+                console.log(table)
+
+                addHeaders(table)
+
+                Us.forEach((Us, index)=> {
+                    tr = table.insertRow(-1)
+                    addData(tr, Us)
+                }) 
+                var div = document.getElementById("showTable")
+                        div.innerHTML = ""
+                        div.appendChild(table)
+            }
+
+            function addHeaders(table) {
+                var tr = table.insertRow(-1)
+                var head = ["User Name", "Message", "Time sent"]
+                head.forEach((val)=> {
+                    var th = document.createElement('th')
+                    th.innerHTML = val
+                    tr.appendChild(th)
+                })
+            }
+
+            function addData(tr, Us) {
+                var tCell = tr.insertCell(-1)
+                tCell.innerHTML = Us["User_id"]
+
+                tCell = tr.insertCell(-1)
+                tCell.innerHTML = Us["User_msg"]
+
+                tCell = tr.insertCell(-1)
+                tCell.innerHTML = Us["Time_msg"]
+            }
+        </script>
+    </body>
+</html>

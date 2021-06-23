@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    background-color: rgb(189, 189, 189);
+}
+ul {
+    background-color: rgb(85, 85, 85);
+    width: max-content;
+}
+li {
+    padding: 10px;
+
+}
+#container {
+    width: fit-content;
+    background-color: rgb(85, 85, 85);
+}
+
+td {
+    border: solid rgb(31, 31, 31);
+    text-align: center;
+    width: fit-content;
+}

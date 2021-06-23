@@ -1,0 +1,62 @@
+[{
+  "_id": {
+    "$oid": "6042456296ba1534cc26f30a"
+  },
+  "atCourse": [
+    "Maths"
+  ],
+  "student_number": 46,
+  "first_name": "45",
+  "last_name": "565",
+  "email": "56",
+  "gender": "Male",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6042470d3084470e4881d42c"
+  },
+  "student_number": 1,
+  "first_name": "Jeanette",
+  "last_name": "Penddreth",
+  "email": "jpenddreth0@census.gov",
+  "gender": "Female",
+  "atCourse": [
+    "Physics, Electronics"
+  ]
+},{
+  "_id": {
+    "$oid": "6042470d3084470e4881d42d"
+  },
+  "student_number": 2,
+  "first_name": "Giavani",
+  "last_name": "Frediani",
+  "email": "gfrediani1@senate.gov",
+  "gender": "Male",
+  "atCourse": [
+    "Chemistry, "
+  ]
+},{
+  "_id": {
+    "$oid": "6042470d3084470e4881d42e"
+  },
+  "student_number": 3,
+  "first_name": "Noell",
+  "last_name": "Bea",
+  "email": "nbea2@imageshack.us",
+  "gender": "Female",
+  "atCourse": [
+    "Programming 1, Chemistry, "
+  ]
+},{
+  "_id": {
+    "$oid": "6042470d3084470e4881d42f"
+  },
+  "student_number": 4,
+  "first_name": "Willard",
+  "last_name": "Valek",
+  "email": "wvalek3@vk.com",
+  "gender": "Male",
+  "atCourse": [
+    "Physics, Game programming, Chemistry, Programming 1, Game programming, "
+  ]
+}]
